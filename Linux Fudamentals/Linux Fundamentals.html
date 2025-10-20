@@ -1,0 +1,2292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>File.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="linux-fundamentals">Linux Fundamentals</h1>
+<h2 id="1introducing">1.Introducing</h2>
+<h3 id="what-is-linux">What is Linux ?</h3>
+<p><code>Linux is a family of open-source, Unix-like operating systems based on the Linux kernel.</code></p>
+<p>Linux itself is just the kernel.</p>
+<h3 id="how-it-became-open-source">How It Became Open Source?</h3>
+<p>The origin of Linux as an open-source project is directly tied to the decision of its creator (Linus Torvalds) to adopt a specific software license.</p>
+<p>Linus Torvalds, a Finnish computer science student, began developing the Linux kernel in 1991 as a personal hobby project. He aimed to create a free operating system kernel for his personal computer.</p>
+<h3 id="what-we-read-in-intensive-and-intensive">What we read in intensive and intensive++?</h3>
+<p>see sceen shot.....</p>
+<p><img src="image.png" alt="alt text"></p>
+<h3 id="basic-commands">Basic Commands</h3>
+<p><code>df</code></p>
+<p>ye command OS ki partations deekhny k use hoti hee</p>
+<p><code>df -h</code> sy hum partation ki deatils readable form me deekh skte hee
+see screen shoot....
+<img src="image-1.png" alt="alt text"></p>
+<p><code>date </code> command see hum copmuter ki date settings beekh skte hee or change bhi k,r skte hee.</p>
+<p><code>pwd</code> &quot;print working directory&quot;</p>
+<p>is command see hum maloom kr sktee hee k hum kis file/directory mee heen.</p>
+<h3 id="what-are-commandsflags">What are commands/Flags?</h3>
+<p><img src="image-2.png" alt="alt text"></p>
+<ul>
+<li>1.Commands</li>
+</ul>
+<p>Commands and Flags basic concept hain jb aap linux me command line interface k saath kam kr rhe hote hain.</p>
+<p>command ek hukum hoti hai, jo computer ko kisi khaas kaam ko anjam dene ke liye di jati hai.</p>
+<ul>
+<li>2.Flags</li>
+</ul>
+<p>Flags (also called options) jo kisi command k behavior ko change krny k lye use hoty hain.</p>
+<ul>
+<li>
+<p>Flags usually start with hyphen -  .</p>
+<ul>
+<li>hyphen - (short form)</li>
+<li>double hyphen -- (long form).</li>
+</ul>
+</li>
+<li>
+<p>Examples</p>
+<ul>
+<li>
+<p>-l: long listing format</p>
+</li>
+<li>
+<p>-a: show all files (including hidden ones)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="paths">Paths</h3>
+<p>Har OS mee 2 types k paths hooty hain</p>
+<ol>
+<li>Absoloute Ptah</li>
+<li>Relative path</li>
+</ol>
+<h4 id="what-is-absoloute-ptah">What is absoloute Ptah?</h4>
+<p>Yeh aisa address hai jo hamesha computer ki jadd (root) yaani \ se shuru hota hai.</p>
+<p>Jaise kisi shehar ka pooray ka pooray address mein house number, street, colony, sab kuch likhna.</p>
+<ul>
+<li>
+<p>Hamesha / (forward slash) se shuru hota hai.</p>
+</li>
+<li>
+<p>Examples</p>
+<ul>
+<li>
+<p>/home/ahmad/Documents/meri_file.txt</p>
+</li>
+<li>
+<p>/usr/bin/ls</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="what-is-relative-path">What is relative path?</h4>
+<p>Yeh aisa address hai jo aap ki haal ki jagah (Current Directory) se shuru hota hai.</p>
+<p>Jaise aap kisi ko kehna &quot;Yahan se seedha chalo, phir left mur jana.&quot;</p>
+<p>Kabhi bhi / se nahi shuru hota.</p>
+<p>. (Dot) = Abhi jahan khade hain (Current Directory)</p>
+<p>.. (Double Dot) = Upar wala folder (Parent Directory)</p>
+<hr>
+<ul>
+<li>
+<p>For Example  aap /home/ahmad mein hain):</p>
+<ul>
+<li>./Desktop = Yahan se Desktop folder mein jao</li>
+<li>../zeeshan = Upar jakar zeeshan folder mein jao</li>
+</ul>
+<hr>
+</li>
+</ul>
+<h2 id="2file-system-hierarchy-overview">2.File System Hierarchy Overview</h2>
+<p><strong>Files aur folders ko ek tarteeb (structure) ke sath arrange karna jese ek tree ke branches hoti hain File System Hierarchy hai.</strong></p>
+<p>Har cheez ki bunyaad <code>/ </code> directory sy hoti he  jis trha tree ki bnyaad root he isy trha linux main bhi<code>root / </code> directory sb files/directories ki bnyaad he .</p>
+<p><em><strong>Is ko <code>Father off al files </code> bhi ke sktee hain.</strong></em></p>
+<p><img src="image-3.png" alt="alt text"></p>
+<h3 id="hierarchy-kyu-zaroori-hai">Hierarchy Kyu Zaroori Hai ?</h3>
+<h5 id="asani-se-access">Asani se Access</h5>
+<p>Har file ka pata hota hai kahan hai, is wajah se access lena asaan ho jata hai.</p>
+<h5 id="system-management-easy">System Management Easy</h5>
+<p>Admins ko system samajhne mein asani hoti hai, kyunke file system munazzam hota hai.</p>
+<h4 id="security--permissions">Security &amp; Permissions</h4>
+<p>Har folder ka apna role aur access level hota hai, jo security ko behtar banata hai.</p>
+<h5 id="maintenance-easy">Maintenance Easy</h5>
+<p>Files ko manage, update, ya delete karna asan hota hai, kyunke sab kuch apni jagah par hota hai.</p>
+<p><em><strong>Inshort</strong></em> File System Hierarchy aik computer ki tarteeb hai jo files aur folders ko aik mustaqil  tareeqay se arrange karti hai, jis se system chalana, maintain karna, aur secure rakhna aasan ho jata hai.</p>
+<h3 id="fhs-main-absolute-path-or-relative-path-ko-use-krte-hoye-filesdirectories-mee-jana">FHS main absolute path or relative path ko use krte hoye files/directories mee jana</h3>
+<p><code>See Screenshoot</code></p>
+<p><img src="image-4.png" alt="alt text"></p>
+<h3 id="if-linux-not-installed-how-to-use-linux">If Linux not installed how to use linux.</h3>
+<p>Agar ap ne apne computer par Linux install nahi kiya, to ap yeh alternative istemal kar sakte hain.</p>
+<ul>
+<li>Online Linux Terminals</li>
+<li>AWS Free Tier</li>
+<li>Mobile Phone Terminals</li>
+</ul>
+<p>Ap Linux ke commands baghair koi machine install kiye online terminals ke zariye practice kar sakte hain. Google par &quot;Linux online terminals&quot; search karen.</p>
+<p><img src="image-5.png" alt="alt text"></p>
+<p>google par wbsite mojood hain jin see hum directly Linux ka terminal use kr skte hain.</p>
+<p><img src="image-6.png" alt="alt text"></p>
+<h3 id="commandsflags">Commands/Flags</h3>
+<ul>
+<li>
+<p>Commands
+Commands atlast a programs
+Linux mein lagbhag sab commands C language mein develop kiye jate hain aur phir binary mein convert kiye jate hain.</p>
+</li>
+<li>
+<p>Flags</p>
+<p>Flags (options ) commands ke sath use kiye jate hain unke behavior  ko change krty hain. Ye hyphen (-) ya double hyphen (--) se shuru hote hain.</p>
+</li>
+</ul>
+<p>agar kisy commands k flags maloom krny hoon to <code>--help</code> command use hoti hai.</p>
+<p>See Screenshot</p>
+<p><img src="image-7.png" alt="alt text"></p>
+<h3 id="flags-ka-use-case">Flags ka use case ...</h3>
+<p>agar command k saath flags lagay jaen to commands ki power yani kaam krny ki taqat or treeqa kar change karty hain .</p>
+<p>Screenshots sy wazaht ..</p>
+<p>Is SS. main simple command k saath 1 directory k andar 1 or dircetory bnan rha hai lakin output main keh rha hai directory ni bn skti.</p>
+<p><img src="image-9.png" alt="alt text"></p>
+<p>is SS. main command k saath <code>-p</code> flag use krty haoy same command run krta hain directoey bn jaaty is maloom hota hai k flags k role Linux main bohat eham or strong hai.
+<img src="image-10.png" alt="alt text"></p>
+<p><code>-p</code> ka matalb hai k jis directory main directory create kr rhee hain us ko parent maan kr directory bnao . is koi error eist ni ho gaa.</p>
+<h2 id="user-switch-krna">User Switch krna ..</h2>
+<h3 id="linux-multiuser-multitasks-hai-dekhain">Linux Multiuser Multitasks hai dekhain.</h3>
+<p>hum neechy dye gae screenshot me mojjod commands ko follow kr k user switch kr skty hain .</p>
+<p><img src="image-8.png" alt="alt text"></p>
+<p><em>is sy maloom hoa k Linux multiuser mutitasks hai.</em></p>
+<hr>
+<h2 id="3about-some-directories">3.About some Directories....</h2>
+<p>Linux main veesy to beshumar directories hoti hain jin main  har makhsso kaam ko krny k lye commands hoti hai lakin yhan kuch directoreis ka overview jany gy jo basic hain .</p>
+<p><img src="image-11.png" alt="alt text"></p>
+<table>
+<thead>
+<tr>
+<th>directories</th>
+<th>opreations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/dev</td>
+<td>Hardware ke parts (jaise printer, hard disk) ko chalane wali special files yahan hoti hain.</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>Computer ke system ki settings aur programmes ki configuration files yahan hoti hain.</td>
+</tr>
+<tr>
+<td>/lost+found</td>
+<td>System kharab hone par bach gayi files is jagah milti hain.</td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>Programmes ko chalane ke liye zaroori basic files yahan hoti hain.</td>
+</tr>
+<tr>
+<td>/var</td>
+<td>Woh files jo waqt ke saath badalti rehti hain, jaise logs, emails, ya database.</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>Zyada connections waly software (jaise games) yahan install hotey hain.</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>CD, USB, ya koi doosri drive computer mein lagane ki temporary jagah.</td>
+</tr>
+<tr>
+<td>/bin</td>
+<td>Saada (basic) commands jo har user istemal kar sakta hai, unke programmes yahan hain.</td>
+</tr>
+<tr>
+<td>/sbin</td>
+<td>Superuser (Admin) ke khaas system commands aur unke programmes yahan hain.</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>Computer ko ON karte waqt chalne wali sab se ahem startup files yahan hoti hain.</td>
+</tr>
+</tbody>
+</table>
+<p>yhan par lib main <code>.SO</code> files ka zikar hoa jo k bilkul nai hain maery lye is ki kuch wazaht ...</p>
+<p>Ye aik compiled binary file hoti hai jo multiple programs ke liye shared code provide karti hai.</p>
+<h3 id="file-editors">File editors</h3>
+<p>Linux files ko edit krny k kaafi editors available hain jo different treeqa sy work krty hain hum kch aditors k baary main padheen gy..</p>
+<ol>
+<li>vi</li>
+<li>vim</li>
+<li>nano</li>
+</ol>
+<ul>
+<li>vi editor
+File  main mojood content ko remove krny,add krny or save krny k lye use hota hai.
+<ul>
+<li>file main changing kry k lye ya add krny k lye <code>vi  filename</code> ki command run krain . jis file main kaam krna us file ka name dena hoo ga.</li>
+<li>ab aap file k andar hain file main kisi line delete krn ho to line ko select kr <code>dd</code> press kain line delete ho jaye gi.</li>
+<li>agar content ki kisi line ko copy krna hoo to line ko select kr k <code>yy</code> type krain file copy ho jaye gi.</li>
+<li>ab agar copy content ko paste krna ho jhaa paste krna ur row ko selct kr k <code>p</code> type kree content save ho jaye gaa.</li>
+<li>kaam krny ka baaad aap ne jo changing ki hain us save krny k lye pehle aap insert mode ko khatam krain <code>Esc key</code> press kr k or phi aap <code>:wq</code> write kr k enter kr dain aap file save kr k baahir aa jayee gee.</li>
+<li>agar bahir nai ana to <code>:w</code> wirte kr k enter kr dain file save ho jaye gi lekin aap file k anar hi hain.</li>
+<li>agar aap ko forcely koi content save krna ho to <code>:eq!</code> write kr k enter krain.</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-12.png" alt="alt text"></p>
+<hr>
+<h2 id="4-softlink-and-hardlinks">4. Softlink and Hardlinks</h2>
+<p>softlink kisi file ka shortcut hota hai.isy <em><strong>symbolic</strong></em> link bhi kehty hain.</p>
+<ul>
+<li>
+<p><strong>Softlink Create krny ka treeqa</strong>..</p>
+<ul>
+<li>agar mey pass 1 file hai jis name <code> myfile</code> hai is ka Softlink bnany k lye command <code>ln -s myfile yasir</code>
+ko run kro ga ab mery pass <code>yasir </code> as a softlink ho ga.
+<img src="image-13.png" alt="alt text"></li>
+<li>jb hum file main koi content likheen gee to wo soft link main bhi show kry ga as same agar hum softlink main vi editor sy kuch write kreen gy to woh parent file main bhi show ho ga. in short both are working same. <strong>see screenshot...</strong></li>
+</ul>
+<p><img src="image-14.png" alt="alt text"></p>
+<ul>
+<li>agar parentfile (yani jis file ka softlink create kia hai)us ko delet kr dain to softlink drop ha jaye ga yani work ni kre ga . Lakin agar same name sy dobara file bna di jaye to softlink kam kre ga as per same .
+<img src="image-15.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<h3 id="directories-and-partitions">Directories and partitions..</h3>
+<ul>
+<li>Directories
+<ul>
+<li>ye daigram directories ko zahir krti hai.</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-17.png" alt="alt text"></p>
+<ul>
+<li>partitions</li>
+</ul>
+<p>ye daigram partitions ko zahir krti hai.</p>
+<p><img src="image-16.png" alt="alt text"></p>
+<ul>
+<li>
+<p>Iska main maksad yeh hai k Linux system main stability aur security k liye directories ko alag partitions main divide karte hain, taake ek issue doosre ko affect na kare.</p>
+</li>
+<li>
+<p>Yahan pe directories jaise /usr, /home, /var, /boot ko alag-alag partitions banaya gaya hai.</p>
+</li>
+<li>
+<p>Partitions ka maksad hota hai data ko alag rakhna (isolation). Agar ek partition corrupt ho jaye to baaki safe rehte hain.</p>
+</li>
+<li>
+<p>Partations ko view krny k lye <code>df -f</code> command use hotia hai.
+<img src="image-18.png" alt="alt text"></p>
+</li>
+<li>
+<p>Agar directory df -h main show ho rahi hai → wo partition + directory hai.</p>
+</li>
+</ul>
+<p><img src="image-19.png" alt="alt text"></p>
+<ul>
+<li>Agar directory sirf ls / main show hoti hai aur df -h main nahi → wo sirf directory hai, partition nahi.</li>
+</ul>
+<p><img src="image-20.png" alt="alt text"></p>
+<h3 id="screenshoot-k-mutabiq">Screenshoot k mutabiq..</h3>
+<ul>
+<li>
+<h4 id="real-partitions">Real Partitions</h4>
+<ul>
+<li>/, /home, /boot</li>
+</ul>
+</li>
+<li>
+<h4 id="virtualtemporary-mounts-ram-or-kernel-provided">Virtual/Temporary Mounts (RAM or kernel provided):</h4>
+<ul>
+<li>/dev, /run, /sys, /dev/shm, /sys/fs/cgroup, /run/user/1000</li>
+</ul>
+</li>
+<li>
+<p>Kernel yeh sab virtual filesystems banata hai because:</p>
+<ul>
+<li>
+<p>Hardware ko files ki tarah represent karna (/dev).</p>
+</li>
+<li>
+<p>Runtime system info aur process info dena (/proc, /sys).</p>
+</li>
+<li>
+<p>Fast, temporary storage provide karna (/run, tmpfs).</p>
+</li>
+<li>
+<p>User-space aur kernel-space ke beech ek bridge create karny k lye. ta k OS kaam kr skeen.</p>
+</li>
+</ul>
+</li>
+<li>
+<h4 id="only-directories-ls--main-hain-but-df--h-main-nahi">Only Directories (ls / main hain but df -h main nahi):</h4>
+<ul>
+<li>bin, etc, lib, media, mnt, opt, proc, root, sbin, srv, tmp, usr, var</li>
+</ul>
+</li>
+</ul>
+<h3 id="advantage-and-disadvanatge-of-softlink-and-hardlink">Advantage and disadvanatge of softlink and hardlink</h3>
+<p>🔹 Soft Links (Symbolic Links)</p>
+<p>Yeh Windows ke shortcuts ki tarah hotay hain.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Advantages</strong></th>
+<th><strong>Disadvantages</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Easy to access- Tum kisi file/folder ka shortcut bana sakte ho aur use easily access kar sakte ho.</td>
+<td>If parent is deleted-child (link) becomes useless (broken link).</td>
+</tr>
+<tr>
+<td>Can cross partitions- Soft link ek partition se doosre partition main bhi point kar sakta hai.</td>
+<td></td>
+</tr>
+<tr>
+<td>Can be created on directories-Tum directory ke liye bhi soft link bana sakte ho. Example: <code>ln -s /var/log logs_link</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>🔹 Hard Links</p>
+<p>Yeh ek tarah ka duplicate reference hota hai original file ka. Matlab dono ek hi inode (file system entry) ko point karte hain.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Advantages</strong></th>
+<th><strong>Disadvantages</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type of backup- Agar ek link delete ho jaye, file ka data doosre hard link ke zariye still accessible hota hai.</td>
+<td>Cannot cross partitions Hard link ek partition ke andar hi ban sakta hai. Agar file <code>/home</code> main hai to uska hard link <code>/usr</code> main nahi ban sakta.</td>
+</tr>
+<tr>
+<td>If parent is deleted, no impact on child - Matlab agar original naam wali file delete kar di, tab bhi data hard link se access ho sakta hai .</td>
+<td>Directories ke liye hard link banane ki ijazat nahi (to avoid loops aur complexity).</td>
+</tr>
+</tbody>
+</table>
+<p>🔹Simple</p>
+<p><strong>Soft link:</strong> shortcut ( original file pe depand krta hai)</p>
+<p><em><strong>Hard link:</strong></em> copy reference (agar original file delet ho bhi jaye to link kan krt hai)</p>
+<h4 id="inode-number">inode number</h4>
+<p>Har file ka ek unique inode number hota hai.</p>
+<p>Inode ek file ke attributes/properties ko store karta hai.</p>
+<p>Inode dekhne ka command hai:<code> ls -i filename</code></p>
+<p><code>ls -il </code>command ka use kar ke tum file ka long list aur inode details dekh sakte ho.</p>
+<p>Inode number pehle se nahi hota, bilkul class roll number ki tarah. Jab file create hoti hai tab usay inode number assign hota hai.</p>
+<p>Hardlink files ka inode number same hota hai.</p>
+<p>Softlink files ka inode number alag hota hai.</p>
+<p><img src="image-21.png" alt="alt text"></p>
+<p>Hum indoe number sy <code>-inum</code> command ko use krty hoaye maloom kr skte hain hain k konsi file apas main linked hain</p>
+<h2 id="alt-text"><img src="image-22.png" alt="alt text"></h2>
+<h2 id="5-ownership-permissions-overview">5. Ownership permissions overview</h2>
+<h3 id="%F0%9F%94%B9-linux-version-kernel-aur-architecture-check-karne-ke-commands">🔹 Linux Version, Kernel aur Architecture check karne ke commands</h3>
+<ol>
+<li>
+<p><code>cat /etc/redhat-release</code>Linux distribution aur uska version check karta hai.</p>
+</li>
+<li>
+<p><code>uname -r</code> Kernel ka version dikhata hai.</p>
+</li>
+<li>
+<p>arch``` Machine ki architecture (32-bit / 64-bit) show karta hai.</p>
+</li>
+</ol>
+<p><img src="image-23.png" alt="alt text"></p>
+<p>Linux main jab hum ls -l command chalatay hain, to file/folder ke details aati hain jo 9 alag-alag fields hoti hain. Yeh slide unhi ko explain kar rahi hai.</p>
+<p><code>-rw-r--r--  1  root  root  0  May 10 08:03  myfile.txt</code></p>
+<h3 id="fields-ka-breakdown-1-se-9">Fields ka breakdown (1 se 9):</h3>
+<ol>
+<li>Type of file.</li>
+</ol>
+<ul>
+<li>
+<p>Pehla character batata hai ke yeh file hai, directory hai ya link.</p>
+<ul>
+<li>
+<p>(-)normal file</p>
+</li>
+<li>
+<p>(d) directory</p>
+</li>
+<li>
+<p>(l) link</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Permissions</li>
+</ol>
+<p><strong><em>Next 9 characters: rw-r--r--</em></strong></p>
+<p>Ye batate hain ke owner, group, others ke paas read (r), write (w), execute (x) permissions hain ya nahi.</p>
+<ol start="3">
+<li>SELinux</li>
+</ol>
+<ul>
+<li>Security context (kabhi show hota hai, kabhi nahi) magar normal ls -l main hamesha visible nahi hota.</li>
+</ul>
+<ol start="4">
+<li>Link count</li>
+</ol>
+<ul>
+<li>
+<p>Yeh batata hai ke file ke kitne hard links hain.</p>
+<ul>
+<li>1 sirf ek naam se refer ho rahi hai.</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>Owner (User)</li>
+</ol>
+<ul>
+<li>
+<p>Yeh batata hai file ka owner kaun hai.</p>
+<ul>
+<li>root</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li>Group name</li>
+</ol>
+<ul>
+<li>
+<p>File ka group jo access control ke liye use hota hai.</p>
+<ul>
+<li>root</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li>Size in bytes</li>
+</ol>
+<ul>
+<li>
+<p>File ka size (bytes main).</p>
+<ul>
+<li>0 matlab empty file hai.</li>
+</ul>
+</li>
+</ul>
+<ol start="8">
+<li>
+<p>Access / Modification time</p>
+<ul>
+<li>Last modification ka time show karta hai.</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>May 10 08:03</li>
+</ul>
+<ol start="9">
+<li>Filename</li>
+</ol>
+<ul>
+<li>
+<p>Actual file/folder ka naam.</p>
+<ul>
+<li>myfile-txt</li>
+</ul>
+</li>
+</ul>
+<h4 id="permission-explanation">Permission Explanation:</h4>
+<p>r = read (padh sakta hai)</p>
+<p>w = write (edit/delete kar sakta hai)</p>
+<p>x = execute (run kar sakta hai, agar script/program ho)</p>
+<p>-= no permission</p>
+<p>rw-  Owner ke paas read + write permission hai</p>
+<p>r--  Group ke paas sirf read permission hai</p>
+<p>r--  Others ke paas bhi sirf read permission hai</p>
+<ul>
+<li>
+<p>9 characters: rw-r--r--</p>
+<ul>
+<li>
+<p>pehly 3 owner k lyee hoty hain.</p>
+</li>
+<li>
+<p>2nd 3 gruop klye hooty hain.</p>
+</li>
+<li>
+<p>last 3 other k lye hoty hain.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Owner file ko read + write kar sakta hai</p>
+</li>
+<li>
+<p>Group aur Others file ko sirf read kar sakte hain, edit ya delete nahi kar sakte</p>
+</li>
+</ul>
+<h4 id="changing-permissions">changing permissions.</h4>
+<ul>
+<li>
+<p>gar kisi file ki permission <code>rw-r--r--</code></p>
+</li>
+<li>
+<p><code>rw-</code>his ka matlab hai k is file k owner(user) ko read&amp;wirte ki permission hai (yani user is file ko pad skta hai or file main likh bhi skta hai).</p>
+</li>
+<li>
+<p><code>r--</code>agy is file ka group yani(ye file jin users k group ko avail hai)wo bs file ko pad skty hain.</p>
+</li>
+<li>
+<p><code>r--</code>last main file user or is k group k ilawa jin ko avaiable hai yano others wo bhi sirf read kr skty hain.</p>
+</li>
+</ul>
+<h3 id="how-can-change-permissions">How can change permissions?</h3>
+<p>Hum as a root user kisis file ki permissions ko change kr sktee hain is k lye <code>chmod</code> command use hoti .</p>
+<p>Yhan screenshots main kuch wzahat deekhen...</p>
+<p>agar kisi ko permission deni hai to + use ho ga .</p>
+<p><img src="image-25.png" alt="alt text"></p>
+<p>yhan par hum permissions off krein gy ..</p>
+<p>agar kisi k lye permissin off krni hoo tu - use ho ga .
+Screenshot dekhain..</p>
+<p><img src="2025-09-30_23-23.png" alt="alt text"></p>
+<p>hum 1 saath sb ki permission bhi off kr skty hain jis ka prectical neechy screenshot main hai.</p>
+<p><img src="image-26.png" alt="alt text"></p>
+<hr>
+<h2 id="6-editors-ownership-permission">6. Editors Ownership Permission</h2>
+<p>vim editors main</p>
+<h3 id="vim-cheat-sheet-basic">Vim Cheat Sheet (Basic)</h3>
+<table>
+<thead>
+<tr>
+<th>Kaam</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Modes</strong></td>
+<td><code>Esc</code>  Normal mode, <code>i</code>  Insert, <code>v</code> →Visual, <code>:</code>  Command-line</td>
+</tr>
+<tr>
+<td><strong>Save</strong></td>
+<td><code>:w</code></td>
+</tr>
+<tr>
+<td><strong>Quit</strong></td>
+<td><code>:q</code></td>
+</tr>
+<tr>
+<td><strong>Save &amp; Quit</strong></td>
+<td><code>:wq</code> ya <code>ZZ</code></td>
+</tr>
+<tr>
+<td><strong>Quit without saving</strong></td>
+<td><code>:q!</code></td>
+</tr>
+<tr>
+<td><strong>Undo</strong></td>
+<td><code>u</code></td>
+</tr>
+<tr>
+<td><strong>Redo</strong></td>
+<td><code>Ctrl+r</code></td>
+</tr>
+<tr>
+<td><strong>Copy  line</strong></td>
+<td><code>yy</code></td>
+</tr>
+<tr>
+<td><strong>Copy  word</strong></td>
+<td><code>yw</code></td>
+</tr>
+<tr>
+<td><strong>Cut (delete) line</strong></td>
+<td><code>dd</code></td>
+</tr>
+<tr>
+<td><strong>Cut (delete) word</strong></td>
+<td><code>dw</code></td>
+</tr>
+<tr>
+<td><strong>Paste</strong></td>
+<td><code>p</code> (baad me), <code>P</code> (pehle)</td>
+</tr>
+<tr>
+<td><strong>Select (character)</strong></td>
+<td><code>v</code></td>
+</tr>
+<tr>
+<td><strong>Select (line)</strong></td>
+<td><code>V</code></td>
+</tr>
+<tr>
+<td><strong>Search text</strong></td>
+<td><code>/word</code></td>
+</tr>
+<tr>
+<td><strong>Next match</strong></td>
+<td><code>n</code></td>
+</tr>
+<tr>
+<td><strong>Previous match</strong></td>
+<td><code>N</code></td>
+</tr>
+<tr>
+<td><strong>Show line numbers</strong></td>
+<td><code>:set number</code></td>
+</tr>
+<tr>
+<td><strong>Hide line numbers</strong></td>
+<td><code>:set nonumber</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-ki-rwx-pemissions-kia-hain">file ki <code>rwx</code> pemissions kia hain?</h4>
+<ul>
+<li>agar aap k pass <code>r</code> yani read ki permission hai too aap file ko read kr sktee ho , file ko copy bhi kr sktee hoo,</li>
+<li>if you have <code>rw</code> permissions o aap file ko modify yani file main likh bhi skty hain, file ko delete bhi kr sktee hain.</li>
+<li>if you have <code>x</code> execute permission so aap us file ko run bhi kr sktee hoo. ye permission scripted file k lye hoti .<img src="image-27.png" alt="alt text"></li>
+</ul>
+<p>yhan phir permission ki baat krian gy..</p>
+<p>1 normal user kisi ko permissions ni de skta jesa k is screen shot main dehay gay hai 1 user kisi or ko execute ki pemission dee rha hai lekin permission denaied ka error a rha hai. is ka matlsb hai k aap as a normal user ksis ko koi permission ni skty ka wo file ko read wrote ya execute kr skee.
+<img src="image-28.png" alt="alt text"></p>
+<h3 id="chattr-command">chattr command</h3>
+<p>(change attribute) Linux command hai jo file ya directory ke special attributes set/change karne ke liye use hoti hai.</p>
+<p>jb ye kisi file ko chattr kr dya jata hai to file na to modify ho skti hai or na hi delete . is file root user bhi delete ni kr sktaa.</p>
+<p>file cahttr k lye command:<code>cahttr +i myfile</code></p>
+<p><img src="image-29.png" alt="alt text"></p>
+<p>file cahttr khatam krny k lye command:<code>cahttr -i myfile</code></p>
+<h3 id="octalway-for-permissions">octalway  for permissions</h3>
+<p>ye digit k saath permission grant krny ka method hai.</p>
+<p><img src="image-30.png" alt="alt text"></p>
+<p>screenshoot k mutabiq data file ki pemissions ```rw-r--r--`` hai to ab is file ki permission octalway sy change krni hain .</p>
+<ul>
+<li>r=4</li>
+<li>w=2</li>
+<li>x=1</li>
+</ul>
+<p>ab sb k lye <code>rwx</code> ki permission on krni hain.</p>
+<p><code>chmod 777 myfile</code></p>
+<p><img src="image-31.png" alt="alt text"></p>
+<h4 id="agar-1-command-hai-or-us-main-10-ya-20-users-hain-jo-us-file-ko-use-krty-hain-to-un-ko-permission-deny-k-lye-1-alag-command-use-hoti-hai">agar 1 command hai or us main 10 ya 20 users hain jo us file ko use krty hain to un ko permission deny k lye 1 alag command use hoti hai.</h4>
+<p>command:<code>setfacl u:username:rwx filename</code></p>
+<p>agar check krna ho k kis user ko access control list sy permission di gai he</p>
+<p>command:<code>getfacl file name</code></p>
+<p><img src="image-34.png" alt="alt text"></p>
+<p>agar kis user ko <code>acl</code> access control list sy nikalna ho to ye coomand use hoti hai.</p>
+<p>command:<code>setfacl -x u:username:rwx filename</code></p>
+<hr>
+<h2 id="7-permissions-and-run-level">7. permissions and run level</h2>
+<ul>
+<li>
+<p>agar ksis file ki sari mermissions odd hain to phir bhi file ka owner or root user file ko overwrite or delete kr ksty hain.</p>
+</li>
+<li>
+<p>agar kisi file ki averall permission off kr dain or us ki parent directory ki jo permissions on hoo gi wo users or group isteaml kr k wo kam kr skty hain jin kk lye directory ki permission on hoo gi is ko Inharit Permission kehty hain</p>
+</li>
+</ul>
+<p><img src="image-32.png" alt="alt text"></p>
+<ul>
+<li>
+<p>inherit permission</p>
+<ul>
+<li>inherit permission ka matlab hai ke ek file ya folder apne parent folder ki permissions ko automatically le leta hai.</li>
+<li>Inheritance se permission management easy hoti hai, kyunki har new file/folder ke liye manually permission set nahi karni padti.</li>
+</ul>
+</li>
+<li>
+<p><strong>chattr <em>command</em></strong></p>
+<ul>
+<li>
+<p>ye command kisi inportant file ko secure krny k lye use hoti hain taa k koi bhi yani root user, owner user ya other user is file ko overwrite ya delet na kr skee.</p>
+</li>
+<li>
+<p>ya command sirf important file (confidantial data) k lye use ki jaati hai .</p>
+</li>
+<li>
+<p>system files ko chattr ni krna Q k logs update hona bhi off ho jaye gee agar system file ko bhi chattr kr dain too</p>
+</li>
+</ul>
+</li>
+<li>
+<p>see screeshot
+<img src="image-33.png" alt="alt text"></p>
+</li>
+</ul>
+<p>chattr command ko htany k baad root user us file delet kr skta hai .</p>
+<ul>
+<li>chattr command htany k lye <code>chattr -i myfile</code> likh kr run kr dain aap ki file sy chattr hat jaye gi.</li>
+</ul>
+<h3 id="runlevels">Runlevels</h3>
+<p>linux main 7 runlevels hoty hain jo 0,1,2,3,4,5,6 hoty haun.</p>
+<p>agar check krna ho k mjoda runlevel kia he to
+<code>runlevel</code> command use hoti hai.</p>
+<p>jb hum runlevel check krty hai to is trha show hota jo screenshoot main dekhya gya hai.</p>
+<p><img src="image-35.png" alt="alt text"></p>
+<p><code>init</code> command sy hum runlevel change krty hain.</p>
+<ul>
+<li>
+<p>about runlevels</p>
+<ul>
+<li>runlevel 0=HALT</li>
+<li>runlevel 6=reboot</li>
+<li>runlevel 1= single user mode</li>
+</ul>
+</li>
+<li>
+<p>if your passwor forget how you can go for 1 runlevel?</p>
+</li>
+</ul>
+<p>runlevel 1 main jaany k lye password ki zroorat ni hoti or agar aap password bool gaye hain to aap 1 runlevel main password change kr skty hain.</p>
+<h2 id="8-partations">8. Partations</h2>
+<p>Harddisk ki daigram...</p>
+<ul>
+<li>
+<p><img src="image-36.png" alt="alt text"></p>
+<ul>
+<li>Is image mein hard disk ke andar ke logical structure ko dikhaya gaya hai — jisme data tracks aur sectors mein organize hota hai, aur ek read/write head unhe access karta hai.</li>
+</ul>
+</li>
+</ul>
+<p>Hardwear ko os k anadr chlany k lye device dirvers use hooty hain.</p>
+<p>Device drivers low level programs hoty hain jo haedwear or respective softwera k darmyaan intract krty hain.</p>
+<h4 id="partition-ka-matlab-hai-hard-disk-ko-alag-alag-logical-hisson-mein-divide-karna">Partition ka matlab hai hard disk ko alag-alag logical hisson mein divide karna.</h4>
+<ul>
+<li>
+<p>Partition = Hard disk ke logical hisson mein taqseem.</p>
+</li>
+<li>
+<p>Linux mein sab kuch / (root) ke neeche mount hota hai.</p>
+</li>
+<li>
+<p>Partitions help karte hain system ko manage, secure aur efficient banane mein.</p>
+</li>
+</ul>
+<p><em><strong>Command Line Tools</strong></em>:</p>
+<ul>
+<li>fdisk, parted, lsblk, mkfs
+sb sy common tool <code>fdisk</code> hai.</li>
+</ul>
+<p>Linux Partition ka Structure</p>
+<table>
+<thead>
+<tr>
+<th>Partition Name</th>
+<th>Mount Point</th>
+<th>Size Example</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/dev/sda1</td>
+<td>/boot</td>
+<td>512 MB</td>
+<td>Boot files ke liye</td>
+</tr>
+<tr>
+<td>/dev/sda2</td>
+<td>/</td>
+<td>20–30 GB</td>
+<td>Main system (Linux OS)</td>
+</tr>
+<tr>
+<td>/dev/sda3</td>
+<td>/home</td>
+<td>100 GB</td>
+<td>Users ka data</td>
+</tr>
+<tr>
+<td>/dev/sda4</td>
+<td>swap</td>
+<td>4 GB</td>
+<td>Extra memory</td>
+</tr>
+</tbody>
+</table>
+<p>Windows main or linux main partaions alag alag tarz ki hoti hain.</p>
+<table>
+<thead>
+<tr>
+<th>Windows</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C:, D:, E: drives</td>
+<td>Everything under <code>/</code></td>
+</tr>
+<tr>
+<td>Each drive is separate</td>
+<td>All folders are mounted under <code>/</code></td>
+</tr>
+<tr>
+<td>Can't mount folders as drives</td>
+<td>Can mount partitions anywhere in tree</td>
+</tr>
+</tbody>
+</table>
+<p>Mount karna ka matlab hai —</p>
+<p>kisi storage device (USB, hard disk, partition) ko system ke file system se attach karna taa ke uska data use kiya ja sake.</p>
+<h2 id="9-runlevels">9. runlevels</h2>
+<h4 id="runlevel-3">runlevel 3</h4>
+<ul>
+<li>
+<p>Multi-user mode with networking, but without GUI (Graphical Interface).</p>
+<ul>
+<li>
+<p>Sirf command line hoti hai.</p>
+</li>
+<li>
+<p>Network kaam karta hai.</p>
+</li>
+<li>
+<p>GUI (graphics / desktop) band hota hai.</p>
+</li>
+<li>
+<p>Server ya repair mode ke liye use hota hai.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Runlevel 3 mein GUI nahi hota,
+lekin tum 6 alag login screens (terminals) use kar sakte ho —
+har ek apna console session hota hai.</p>
+</li>
+</ul>
+<p>ALT + F1 sy aap pehla console use kr skty hain.
+ALT+F2 sy doosry consool main move ho jaaty hain.
+isy trha F6 tk aap 6 consloes main move kr skty haib jis console main jana hon <code>ALT+F</code> k saath us ka number likh dain yani   5 main jana hai ton<code>F5</code> .</p>
+<p>level3 main TTYs  (teletype terminal) interface chal rha hota hai. yani har chez type krni hogi.</p>
+<p>TTY ek<code>text scree</code> hoti hai jahan tum commands likh kar system control karte ho.
+Ye driver nahi, balki interface (terminal) hoti hai jo console driver ke upar chalta hai.</p>
+<p><img src="image-39.png" alt="alt text"></p>
+<p>Runlevels sirf services aur interface change karte hain.
+storage ya file system par koi asar nahi padta.
+Matlab agau runLevel3 par kam krty hoaye main runlevel5 py switch kr doo to files remove nhi hoon gi. bs services change ho jati hain storage remove nhi hota.</p>
+<p><strong>Important concept</strong></p>
+<p>Runlevel3 main hoty hoye hum GUI use kr skty hain.</p>
+<p>is k lye command <code>startx</code> use hoti hai.</p>
+<p>agar GUI sy wapis niklna hai too is k lye <code>pkillx</code> command use hoti hi.</p>
+<p><em><strong>incase..</strong></em></p>
+<p>agar desktop py GUI server install ho ga to ye commands chalee gi agar <code>minimla istall </code> ho ga to ye kam ni kry gi q k us GUI pacakge install nhi.</p>
+<p><img src="image-40.png" alt="alt text"></p>
+<p>Hum nee pehly deekha or prha hai k:</p>
+<p>jb hun singleuser mode (runlevel1) main jaaty hain to bydefault hum login id k begair or password k bagir login kr skty hain.</p>
+<p>ab yha hum password set krain gee .</p>
+<p><code>/etc/sysconfig/init</code></p>
+<p>runlevel 1 main rehty hoaye aap <code>/etc/sysconfig/init</code> ye run krain too aap k pass 1 file open ho gi <code>shift g </code> dbaa k last py check karin agay <code>|SINGLE=/sbin/sush|</code> ayee ga yaha aap is line ko copy kr k neechy paste kr dain or <code>sush</code> ki jgha <code>sulogin</code> edit kr dain or jo line copy kia hai us k start py # lga k comment out kr dain ab aap k last line hi system read kry ga or is k mutabiq aap ny ab single user modd py bhi login page set kr dya hai .</p>
+<p><strong><em>ruslte</em></strong></p>
+<p>`:wq likh kr save kr dain or doobar runlevel5 sy runlevel1 (single user mode)main jayee to ab yha login page show ho ga r password maangy ga.</p>
+<hr>
+<h2 id="10targets-partitions-logic-concept">10.Targets Partitions Logic Concept</h2>
+<p>REHL 6 main runlevels hooty hain.</p>
+<p>Jb k REHL 7&amp;8 mian main targets hooty hain.</p>
+<ul>
+<li>
+<p>yhaan par hum 2 targets k mutalaq padheen gy</p>
+<ul>
+<li>Multiuser Tragets</li>
+<li>Graphical targets
+Current target deekhny ki command..</li>
+</ul>
+<p><code> systemctl get-default</code></p>
+</li>
+</ul>
+<p>REHL 7&amp;8 main target hooty hain us ka matlab ye nhi hee kn yhan runlevel show nhi hooty agay REHL 7&amp;8 mian bhi <code>runlevel</code> ki command run krty hai too aap ko runelevel show hoo gy.as user friendly.</p>
+<p><img src="image-42.png" alt="alt text">
+jeesy hun REHL6 main runelevl sitch krny k lye <code>init</code> lift use krt hain Same ust trha REHL 7 ya 8 main hum targts switch krny k lye <code>systemctl isolate multiuser</code> too app multi user target main switch kr jayeen gy
+or agar<code>systemctl isolate graphical</code>  to aap grphical target main switch kr jayeen gy. See screenshot..</p>
+<ul>
+<li>
+<p>important</p>
+</li>
+<li>
+<p><code>systemctl isolate multiuser</code> is similar to <code>runlevel3</code></p>
+<ul>
+<li>Yaani ye black terminal hai only</li>
+</ul>
+</li>
+<li>
+<p><code>systemctl isolate graphica</code> is similar to <code>runlevel 5</code></p>
+<ul>
+<li>yaani ye Grphical userbinterface hai.</li>
+</ul>
+</li>
+</ul>
+<p>REHL7and8 main single user mode(yaani runlevel 1)ka concept alag hai.</p>
+<p>REHL7and8 main single user mode(yaani runlevel 1) main jaany k lye hmy <code>initramfs </code>file break krni pdti hai. phir 1 shell milta hai. is k baary main hum aagy padheen gy ki is command kia hai <code>initramfs</code> kia hai.</p>
+<ul>
+<li>
+<p>Break ki command
+<code>BREAK initramfs</code> hai.</p>
+<ul>
+<li>iska proper concept hum aagy deekhen gai</li>
+</ul>
+</li>
+</ul>
+<h4 id="abhi-hum-sirf-ye-deekhen-gy-k-78-main-singleuser-mode-k-passwor-kesy-change-kr-skty-hain">Abhi hum sirf ye deekhen gy k 7&amp;8 main singleuser mode k passwor kesy change kr skty hain...</h4>
+<h3 id="fdisk"><code>fdisk</code></h3>
+<p>OS main harddisk ki storage kam q show hoti hsi?</p>
+<p><code>Ans:</code></p>
+<p>Hard disk kam is liye show hoti hai
+kyunki company aur OS dono storage ko alag tarah se ginte hain.</p>
+<p>Company kehta hai: 1 GB = 1000 MB</p>
+<p>Lekin OS kehta hai: 1 GB = 1024 MB</p>
+<p>Is liye jab OS ginta hai to size thoda kam nikalta hai.</p>
+<p><img src="image-43.png" alt="alt text"></p>
+<p>cylinder ki koi permanet value ni hooti. disk ke physical design par depend karta hai.</p>
+<p>amooman GBs Harddisk main 1 cylinder <code>8mb</code> ka hoota hai.</p>
+<p>or agar 500 MBs ki hardisk hai too cylinder ki value 1 Mb hoo gi.</p>
+<p><strong>Screenshoot k mutabiq..</strong></p>
+<p><code>16GB</code> harddisk main <code>1958</code> cylinders hooty hain agar 1 cylinder <code>8Mb</code> k hoo too.</p>
+<p><code>1958*8=1566MB</code> Cylinders ko Mb main</p>
+<p>1566/1024=16 or 15 Gbs approxly</p>
+<p>agar 16Gb ki harddisk hai or main nee 24MB ki 1 partation bnani hai too 8Mbs k hisaab sy 3 cylinders user hoon gee.</p>
+<p>Harddisk and partaion create krna.</p>
+<ul>
+<li>
+<p><code>Harddisk create krna</code></p>
+<ul>
+<li>
+<p>machine ko sutdown<code>shutdown -f now</code> krain.</p>
+</li>
+<li>
+<p>Settings main storage open kr k <code>SATA</code> par add ko click kr k create krain.</p>
+</li>
+<li>
+<p>storage select krain k kitni chaye or choose kr lain.</p>
+</li>
+<li>
+<p>ab maechine start karin aap ki new harddisk create ho gai hai .</p>
+</li>
+<li>
+<p>check krny k lyee <code>ls -l /dev/sd*</code> command run krain. latest name sy aap ki new harddisk show ho gi.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code> Harddisk main partaion create krna</code></p>
+<ul>
+<li>partation create krny k lye <code>fdisk /dev/HDD ka name</code> likh kr command run krain.</li>
+<li>file main app ko deatils dikheen gi <code>m for help</code>sy.</li>
+<li><code>n</code> sy mew partation</li>
+<li><code>p</code> sy partation ki deatils print krain etc.</li>
+<li><code>n</code> likh kr run karin or aagy required details dain jitni storage ki aap ny paration bnanai hai, name number kia rkhna hai,kis cylinder sy start krna hai etc.</li>
+<li>method complete kr k<code>p</code> sy aap partation ki detials check kr skty hain.</li>
+<li><code>q</code> quit kr k aap file sy bahir aa skty hain.</li>
+</ul>
+<h5 id="fdisk-sy-sirf-partation-create-kr-skty-hain-or-delete-kr-skty-hain"><code>fdisk sy sirf partation create kr skty hain or delete kr skty hain.</code></h5>
+<h4 id="1-hardisk-main-sirf-4-partation-bna-skty-hain"><code> 1 hardisk main sirf 4 partation bna skty hain</code></h4>
+<h4 id="agar-4-sy-zayad-bnana-hai-too-aap-4th-aprtation-extended-bnaye-is-sy-error-nhi-aye-gaa-agar-already-4-primary-partation-hain-to-phir-extended-bhi-bnaye-ga-aap-ko-4th-paration-extended-bnana-ho-ga"><code>agar 4 sy zayad bnana hai too aap 4th aprtation extended bnaye is sy error nhi aye gaa agar already 4 primary partation hain to phir extended bhi bnaye ga aap ko 4th paration extended bnana ho ga. </code></h4>
+<h4 id="extended-partation-k-andar-bhi-aap-partation-bhi-bna-skty-hain-or-cylinders-hold-bhi-kr-skty-hain-or-baad-main-us-cylinders-par-bhi-aprtaion-bna-skty-hainalt-text"><code> extended partation k andar bhi aap partation bhi bna skty hain or cylinders hold bhi kr skty hain or baad main us cylinders par bhi  aprtaion bna skty hain.</code><img src="image-44.png" alt="alt text"></h4>
+</li>
+</ul>
+<hr>
+<h2 id="11partitions-logic-concept-fstab">11.Partitions Logic Concept-FSTab</h2>
+<h4 id="jb-hum-partations-bnaaty-hain-too-fdisk-un-ki-entry-or-deatils-partation-table-main-main-likh-deta-hai-k-paration-kitna-storage-rkhti-haikitny-cilynders-par-mustmil-hai-kis-cylinder-sy-start-ho-rhi-hai-or-kis-cylinder-pee-end-ho-rhi-hai-etc"><code>jb hum partations bnaaty hain too fdisk un ki entry or deatils partation table main main likh deta  hai k paration kitna storage rkhti hai,kitny cilynders par mustmil hai, kis cylinder sy start ho rhi hai or kis cylinder pee end ho rhi hai etc.</code></h4>
+<ul>
+<li>
+<p><code>Partation Table</code></p>
+<p><code>Partition Table ek aisa structure hai jo hard disk  ke start mein hota hai. Yeh table operating system ko batata hai ke aap ki disk par partitions kaise arrange hain.</code></p>
+</li>
+</ul>
+<p><strong>Yeh basically ek &quot;map&quot; ya &quot;index&quot; ki tarah hai.</strong></p>
+<ul>
+<li>
+<p>Yeh Kyon Zaroori Hai?</p>
+<ul>
+<li>
+<p>Disk par har partition ki jagah (location) track karne ke liye.</p>
+</li>
+<li>
+<p>Yeh define karne ke liye ke konsa partition &quot;bootable&quot; hai.</p>
+</li>
+<li>
+<p>Operating system ko yeh batane ke liye ke usay data kahan read/write karna hai.</p>
+</li>
+</ul>
+<p>Jb hum partation create kr k <code>w</code> save kr qiut <code>q</code> krt hain to partation table main save ho jT hai k partation create ho gai hai.</p>
+<p>Isy trha ye process Krenal table pai bhi chalta hai k Harddisk main 1 or partation create ki gai jis sy OS partation access krny ki info hasil krta hai.</p>
+</li>
+<li>
+<p>Is k lye command hai <code>partx -a</code></p>
+</li>
+<li>
+<p><code>REHL 6 main partx -a</code></p>
+<ul>
+<li>Yeh kisi specific disk ke sare new partitions ko kernel ke knowledge mein add kar deti hai.</li>
+<li>ye sirf new partations ki detials update krti ahi.</li>
+</ul>
+</li>
+<li>
+<p><code>REHL 7 main partprobe</code></p>
+<ul>
+<li>partprobe ek aisi command hai jo kernel ko forcefully batati hai ke disk ke partitions table mein change hua hai.</li>
+<li>Ye naya or puana sari deatails update krtihai.</li>
+</ul>
+</li>
+<li>
+<p>ye command partation table sy deatils lee kr kernal table ko update krti hai or RAM main save ho jata hai .</p>
+</li>
+<li>
+<p>System ko reboot kye bgair kernal table ko update krny k lye use hoti hai</p>
+</li>
+<li>
+<p>agar OS ko reboot kr dya jaye to kernal table khud hi update hoo k partations ki detail load kr leta hai.</p>
+</li>
+</ul>
+<p><img src="image-45.png" alt="alt text"></p>
+<ul>
+<li>
+<p><code> agar partation table main details update hoo gi to kernal table main update hoo</code></p>
+</li>
+<li>
+<p>Make sure k partatiom table main <code>w</code> likh kr partation ki deatls update kr dain.</p>
+</li>
+<li>
+<p><code>Formating</code></p>
+</li>
+<li>
+<p><code>Formatting ek aisa process hai jis mein aap kisi partition ya drive ko prepare karte hain data store karne ke liye.</code></p>
+</li>
+<li>
+<p><code>For example:</code> Aap ek nayi khali copy lete hain. Uss copy par lines (guides) khenchte hain taake aap baad mein acchi tarah likh saken.</p>
+</li>
+</ul>
+<p>File System  create krna bhi formating hai.</p>
+<p>Command:<code> mkfs.ext4 /dev/sdb1</code></p>
+<ul>
+<li>
+<p><code>Partitioning drive ko hisson mein taqseem karta hai</code> jaise ghar ke kamre banana.</p>
+</li>
+<li>
+<p><code>Formatting har hissey ko usable banata hai </code>jaise har kamrey mein almariyan aur table lagna.</p>
+</li>
+</ul>
+<p><code>FileSystems</code></p>
+<p>Linux version k issab sy filesystem bnaye gyee hain.</p>
+<ul>
+<li>REHL v4 k lye <code>ext2</code></li>
+<li>REHL v5 k lye <code>ext3</code></li>
+</ul>
+<p>jeesa k neechy pic main hai.</p>
+<p><img src="image-46.png" alt="alt text"></p>
+<p>Par ye baat zroori nhi k jis REHL Version k lye file system ka version bnaya gya hai wo sirf wo hi use kr sktaa hai. har version har filesystem ka version use kr skta hai . Bs us k packages install krny hoo gy.</p>
+<ul>
+<li><code> Mounting</code></li>
+</ul>
+<p>Defination</p>
+<p><code>Kisi bhi storage device ke partition ko system ki directory tree ke kisi khaas folder k saath attach krna, taa k partition ki files aur folders tak user ki rsaai ho sake.</code>
+Mounting make sure krti he ke kis physical device ka data kis folder ke andar dikhna chahiye.</p>
+<p>Formatting<code> Drive ko use karne ke qaabil banana (isme file system banta hai).</code></p>
+<p>Mounting <code>Us tayyar drive ko system se jorna, taake aap usme files daal aur nikal saken.</code></p>
+<ul>
+<li>Maping vs Mounting:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Mounting</th>
+<th>Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kya Jodte Hain?</strong></td>
+<td>Physical Device (HDD, USB)</td>
+<td>Virtual/Network Resource</td>
+</tr>
+<tr>
+<td><strong>Kahan Jodte Hain?</strong></td>
+<td>Directory/Folder (e.g., <code>/mnt/</code>)</td>
+<td>Drive Letter (e.g., <code>Z:</code>) ya Virtual Path</td>
+</tr>
+<tr>
+<td><strong>Platform</strong></td>
+<td>Linux/UNIX mein zyada common</td>
+<td>Windows mein zyada common</td>
+</tr>
+</tbody>
+</table>
+<p>agar hum nee kisi directory ko partation k saath mount kia hai too data partation main save hoota hai isy wjha sy directory ko unmount kr dain too data lose ni hoota.</p>
+<p>agar doobara mount krain gee too data doobara directory main show hoony lgy ga.</p>
+<p>agar pehli directory koo <code>unmount</code> kr dain or kisi or directory ko <code>mount</code> kr dain too same data nai directory main show hoony lgy ga.</p>
+<ul>
+<li><code>fstab</code></li>
+</ul>
+<p>ye mount ki gai directory system k reboot hony tk hi mount rhy gi. yaani yee temporary process hai. isko permanent krny k lyee <code>fstab</code> ka concept use hota hai.</p>
+<p><code>fstab (file system table) ik boot process file hai yaani jb system boot hota hai to ye file refer hota hai.</code></p>
+<p>is ki 6 fields hoti hain.</p>
+<p><img src="image-47.png" alt="alt text"></p>
+<hr>
+<h3 id="12partitions-task-solving-compression-tools-redirect-topic">12.Partitions Task Solving-Compression Tools Redirect Topic</h3>
+<ul>
+<li>Compression Tools</li>
+</ul>
+<p>compression Kisi cheez ko shrink krna, deflate krna,us main sy azafi hava nikaal deena hai.</p>
+<p>Linux main ompression ek aisa process hai jisme files ya folders ko chota size mein convert kiya jata hai taki
+Kam storage use ho,
+Transfer fast ho,
+Bandwidth bache.</p>
+<h3 id="">*</h3>
+<p>*saary characters ko bulany k lye.yani <code>rm*.jpg</code> see sari photos delete ho jaye gi.</p>
+<p>? kisi 1 character ko mukhatib kry ga .</p>
+<p>file1.txt =<code> file?.txt</code></p>
+<h4 id="">?</h4>
+<p>ik character wali sab files dikhao..</p>
+<p><code>ls file?.txt</code></p>
+<p><code> file1.txt, fileA.txt, fileX.txt</code></p>
+<p>Do character wali files is trha deekh skty hain.
+<code>ls pic??.jpg</code></p>
+<p><code>pic01.jpg, picAB.jpg, pic12.jpg</code></p>
+<p><img src="image-48.png" alt="alt text"></p>
+<h4 id="file-ko-zip-krny-k-lye-command">-<code>File ko zip krny k lye command</code></h4>
+<p><code>gzip filename</code>
+<code>bzip filenme</code></p>
+<p>jab hum ksis file ko zip krty hain to file ki extantion khud ba khud change hoo k <code>.gz ya .bz</code> hoo jata hai.
+<img src="image-50.png" alt="alt text"></p>
+<h4 id="file-ko-unzip-krny-k-lye-command">- <code>file ko unzip krny k lye command</code></h4>
+<p><code>gunzip filename</code>
+<code>bunzip filename</code></p>
+<ul>
+<li>
+<p>zip kia hai?</p>
+<p>ye command multiple files ko compress krta hai or sb files ko 1 file main archive krta hai.</p>
+</li>
+</ul>
+<p><img src="image-51.png" alt="alt text"></p>
+<p><img src="image-52.png" alt="alt text"></p>
+<hr>
+<h2 id="13archive-compression-tools">13.Archive Compression Tools</h2>
+<p>File ko compress krny ki suitability file ki halat par depend krti hai k file kis noyat ki hai. .txt hai,.png hai ya .dochai.</p>
+<p>Isy hiassab sy file compress hoti hai simple file yani .txt .doc file see zyada compress hoti hai or .doc file .png file se zyada compress hoti hai.</p>
+<p><code>zip</code> ka maqsad files ko archive krna yaani multiple files ko gether krna akhatta krna or 1 single file bna dena hai.</p>
+<p>agar compressive file ko hum <code>cat</code> sy read krain gee to file data croptted show hoo ga yaani unreadabel.
+<img src="image-53.png" alt="alt text"></p>
+<p>Hum is file k data koo <code>zcat filename</code> command run readable form main hasil kr skty hain agar file ko uncompress kiye bgair read krna hai.<img src="image-54.png" alt="alt text"></p>
+<p>agar file <code>bzip</code> sy compress kia hai wo file <code>bzcat file name</code> sy read hoo gi.</p>
+<p>see   SS.
+<img src="image-56.png" alt="alt text"></p>
+<p><img src="image-55.png" alt="alt text"></p>
+<ul>
+<li><code>*</code> ka usecase</li>
+</ul>
+<p>agar hum <code>*</code> ko usde krain to is ka matlab hai all select yaani jis directoy main hain us main mjood saari file ko select kroo.</p>
+<p>agar same diretory mai hain too simple <code>* </code> use hoo ga agar kisi file main rehty hoye kisi or file k data ko select krna hee to file ka proper path de kr last py<code>*</code> use krai keesy k .. <code> etc/mint/*</code></p>
+<p>jb hum file ko zip krty hain too jis file main hum sb file ko archive krty hain us file ki extamation koi bhi likh dain to file to bhi koi masla ni hoo ga of files archive hoo jaye gi.</p>
+<p>lekin <code>ls -l </code>sy file ki list niakleen gy to file red highlighted ni hii go .</p>
+<p><img src="image-57.png" alt="alt text"></p>
+<ul>
+<li>
+<h3 id="tar">TAR</h3>
+</li>
+</ul>
+<p>Yeh aisi file hai jis mein bohat si files jamaa kar ke band kar di gayi jaati, jaise aap saamaan ek box mein pack karte hain.</p>
+<ul>
+<li>
+<p>.tar.gz</p>
+</li>
+<li>
+<p>.tgz</p>
+</li>
+</ul>
+<p><img src="image-58.png" alt="alt text"></p>
+<p>tar sirf files ko akhata krta hai compress ni krta compress krny k lye tar k saath compressive tools <code>gzip</code> ya <code>bzip</code> use krny hooty hain.</p>
+<p><img src="image-59.png" alt="alt text"></p>
+<p>agar in files ko axtarct krna hai to ya command use hoon gi agar <code>tar</code> k saath <code>.gzip</code> use hoi hai to is file ko <code>tar -zxvf filname</code> use hoo ga.</p>
+<p>agar file <code>tar</code> <code>bzip</code> k saath compress or archive hoi hai too <code>tar -jxvf filename</code> extract hoo gi.</p>
+<p>agar file ki halat maloom krni hai k compress hai ya archive+compress hai to is k lye <code>file filename</code> command use hoti hai.</p>
+<h3 id="linux-k-backup-tools">linux k backup tools.</h3>
+<p>cp  ,  rsync, cpio linux k backup tools hain</p>
+<p>yaani in tools sy hum data ka backup lee skty hain.</p>
+<p>cp sy kisi file ka backup leena hoo ye commnd hai.</p>
+<p><code>cp /data/* /yasir</code></p>
+<p>yaani <code>data </code>dir k andar jo bhi files ya data hai usy <code>yasir</code>main bhi copy krdo.</p>
+<p><code>cp</code>tool main directory k andar agar directory hoo too ya error deta hai yaani data copy ni krta.</p>
+<ul>
+<li>
+<p><code>rsync</code> ik powerful backup tool hai .agar koi puchy k bakup k lye konsa tools use hota hai to sb pehly <code>rsync</code>.</p>
+<ul>
+<li>
+<p>ye remote sync bhi kr sktaa hai yaani other machine par bhi backup ly skta hai.</p>
+</li>
+<li>
+<p>ye 1 encreamentall tool hai.</p>
+</li>
+<li>
+<p><code>command</code>
+<img src="image-60.png" alt="alt text"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="14rsync">14.RSync</h2>
+<p><code>rsync</code> is lyee powerful tools hai q k is sy 1 machine sy doosri machine main data k  backup ly skty hain.
+agar same machine main backup lain to machine crash hoony ki sorat main bacup bhi katam hoo skta hai is lye is tool ka usecase bohat powerful hai.</p>
+<p>rsync k saath compression tools 9.bzip and .gzip0  ko bhi use kia jaa skta hai.</p>
+<h4 id="tacking-backup">Tacking Backup.</h4>
+<p>agar machine to machine backup lena hai too aap lee skty hain or agar compant aap SAN.NAS ya tape drive provide kr rhi hai to aap us main backup lt skty ahin.</p>
+<p><img src="image-61.png" alt="alt text"></p>
+<ul>
+<li>Remote copy (SSH ke zariye):</li>
+</ul>
+<p><code>rsync -avz /home/yasir/docs username/backup/</code></p>
+<h3 id="a-archive-mode">-a (Archive Mode)</h3>
+<p><code>Ye ek combination flag ha ye bohat si options ko enable krt hai.jaise ek folder ka excat clone bnana hoo-a wahi karta hai.</code></p>
+<ul>
+<li>
+<p>Iska kaam hai file ka pura structure aur properties preserve karna.</p>
+<ul>
+<li>
+<p>r recursively copy karna (subfolders ke sath)</p>
+</li>
+<li>
+<p>l  symbolic links preserve karna</p>
+</li>
+<li>
+<p>p  permissions preserve karna</p>
+</li>
+<li>
+<p>t  timestamps preserve karna</p>
+</li>
+<li>
+<p>g group info preserve karna</p>
+</li>
+<li>
+<p>o  owner preserve karna</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="v-verbose">-v (Verbose)</h3>
+<p><code> ye sirf output dekhata hai k jo file copy ki hai ya jis ka backup liya hai us ka size kitna tha,data kitna transfere hoa hai.etc</code></p>
+<ul>
+<li>-v use kiye bgair  rsync  silently kaam karta hai.</li>
+<li>-v, k saath aap real-time feedback hasil kr skty hain.</li>
+</ul>
+<h3 id="z-compress-data-during-transfer">-z Compress Data During Transfer.</h3>
+<p>Agar aap network par file bhej rahe ho (remote system) k zryee data transfere krny sy pehle ye data ko compress kr deta hai or Destination par jaake woh data decompress hota hai taaa k bandwidth bachy aur transfer fast hoo khaas tor par slow networks par.</p>
+<p><code>- SSH transfer ke dauran ye automatic hota hai.</code></p>
+<h3 id="delete">--delete.</h3>
+<p>`Ye ensure karta hai ke destination directory bilkul source ke barabar ho.yaani joo file source dir main mjood nhi hee wo destination see delte ho jaye gi.</p>
+<p><code>mirror image</code> banana yaani source se extra cheezein destination se hata di jayen.</p>
+<h3 id="p-progress--partial-transfer-resume">-P  Progress + Partial Transfer Resume</h3>
+<ul>
+<li>
+<p>progress har file ka progress is sy daiks skty hain.</p>
+</li>
+<li>
+<p>transfer beech main ruk jaaye (network down, etc.), to hun is process ko resume kr skty hain.</p>
+</li>
+</ul>
+<h3 id="ssh"><code>SSH</code></h3>
+<p><code>SSH (Secure Shell) ek network protocol hai jo aapko remote computer ya server se secure connection ke zariye connect hone ki ijazat deta hai.</code></p>
+<p>SSH ka kaam.</p>
+<ol>
+<li>
+<p>Remote system se securely login karna</p>
+</li>
+<li>
+<p>REmote server par command run krna.</p>
+</li>
+<li>
+<p>Files transfer karna (yani rsync)</p>
+</li>
+<li>
+<p>securely Port forwarding / tunneling karna</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><code>SSH</code>Working</p>
+<ul>
+<li>
+<p>jb kisi remote system sy connect hoty hain<code>ssh username ya ip</code> to apka system aur remote system ek encrypted connection establish karte hain.</p>
+</li>
+<li>
+<p>password Ya SSH key pair (public/private keys)  se Authentication hoti hai.</p>
+</li>
+<li>
+<p>agar connect ho jaye too aap remote terminal par directly commands run kar sakte ho jaise aap local system par karte ho.</p>
+</li>
+<li>
+<p>SSH data ko encrypt karta hai taakePasswords aur commands safe rahen Koi bhi s attacker data ko read na kar sake.</p>
+</li>
+<li>
+<p>SSH port 22 par run hota hai.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Port ek numarical gate hota hai jisse computer ke andar koi network service communicate karti hai.</p>
+<p>Har computer ya server ke paas ek IP address hota haijaise ghar ka address.
+Lekin us ghar ke andar bohot saare kamray yaani services hoti  hain jeesy web server, SSH, email server, etc.
+Ye kamray alag ports ke zariye identify hote hain.</p>
+<h4 id="ssh-or-har-network-service-ka-port-number-change-kiya-ja-sakta-hai"><code>SSH or har network service ka port number change kiya ja sakta hai</code></h4>
+<h4 id="qkia-hum-ports-ko-change-kr-skty-hain"><code>Q.kia hum ports ko change kr skty hain?</code></h4>
+<h4 id="ans--g-han-hum-ports-ko-change-kr-skty-hain">Ans:- <code>g han hum ports ko change kr skty hain.</code></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Service</th>
+<th style="text-align:left">byDefault Port</th>
+<th style="text-align:left">Example of Custom Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>SSH</strong></td>
+<td style="text-align:left">22</td>
+<td style="text-align:left">44, 2222</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>HTTP (Web)</strong></td>
+<td style="text-align:left">80</td>
+<td style="text-align:left">8080</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>HTTPS (Secure Web)</strong></td>
+<td style="text-align:left">443</td>
+<td style="text-align:left">8443</td>
+</tr>
+</tbody>
+</table>
+<h4 id="what-isstat-commmand">what is<code>stat</code> commmand:-</h4>
+<p><code>stat command ka kaam hota hai file ya directory ke detailed information dikhanajaise size, permissions, owner, timestamps, inode number, or links vgera.</code></p>
+<ul>
+<li><code>stat filename</code></li>
+</ul>
+<p>rsync source k modify time or destination k modify time ko compare rkhta hai yaani same rkhta hai. agar source k modify time change ho ga to destination ka m-time bhi change ho jaye ga.bashart k aap rsync kr k doobara update krain too.</p>
+<hr>
+<h3 id="15lun-scanning-disk-scanning-logical-extended-partition1">15.Lun Scanning Disk Scanning Logical-Extended Partition_1</h3>
+<p>What is LUN?</p>
+<p><code>LUN ka matlab hota hai Logical Unit Number. Yeh storage system jaise SAN (Storage Area Network) ka logical partition hota hai.</code></p>
+<p>What is LUN scanning?</p>
+<p><code>LUN Scanning ka maqsad hai k server apne storage system (SAN/NAS) se updated LUN ko detect kare.</code></p>
+<p><strong>Jab storage admin kisi server ke liye naya LUN assign karta hai,to server ko wo LUN automatically nahi dikhta.
+Server ko scan karna padta hai taake wo naya LUN detect aur use kar sake.</strong></p>
+<p>jb hum LUN scanning k lye commandecho <code> &quot;- - -&quot; &gt; /sys/class/scsi_host/host0/scan</code> run krty hain too system main mjood HBA card SAN main mjodd HBA card sy wired connection bnata hai or OS ko inform krt hai k naya LUN assign ho gaya hai to tumhe <code>lsblk</code>ya <code>fdisk -l</code> me nayi disk dikhti hai.</p>
+<p>What is HBA card?</p>
+<ul>
+<li>
+<p>HBA ka matlab hota hai Host Bus Adapter.</p>
+<p>Yeh ek hardware card hota hai jo server ko SAN storage se connect karta hai.Jab hum LUN Scanning naye LUN detect karty hain to wo scan HBA card ke through hota hai.
+<img src="image-63.png" alt="alt text"></p>
+<p>linux server mian jo LUN ko control krta hai usy <code>initiator</code> kehty hain. ye HBA card k through ficer conection sy SAN ko command krta hai .</p>
+<p>SAN ko hum <code>target</code> kehty hain . or SAN k anadar jo dsiks ko control krta hai us ko <code>SCSI controller</code> kehty hain. ye disks ko control or manage krt hai.</p>
+<p>SAN ki disks sy jo LUNs bnaye jaaty hain un ko <code>LUN id</code> sy represent kia jata hai.</p>
+</li>
+<li>
+<p>initiator k fiber connection k zryee target ko command dena, or SCSI controller ka disks ko manage kr k LUNs banana or LUNs id zryee serevr ko LUNs detect krny ka process hi LUN Scanning hai.</p>
+</li>
+</ul>
+<h4 id="imoprtant-point"><code>imoprtant Point</code></h4>
+<p><img src="image-64.png" alt="alt text"></p>
+<hr>
+<h2 id="16fdisk-partitioning-cases-standards-and-mounting">16.Fdisk Partitioning Cases Standards and Mounting</h2>
+<p><code>extended partation koi storage ni rkhta magar is main hum jo logical partations create krty hain wo sotrage own krty hain.</code></p>
+<p>yaani hum pehly 3 primary partations create krty hain <code>sda ,sda1 ,sda2,</code> or 4rh extended partation hoyi hai<code> sda5</code>or us main lodical partations create krain <code>sda6,sda7 sda8</code> ab yhaan par 9 partation create hochuki hain lakin sirf 8 partations storage own krti hain .<code>sda5</code> yaani extend partation koi storage ni gheerti ye sirf area provide krti hai.</p>
+<p><code>Q:-agar hum first partation primary bnaye to second wali extend bna skty hai?</code></p>
+<p><strong>g han bna skty hain .</strong></p>
+<p><code>Q:- kia extend partation k baad primary paration bna skty hain?</code></p>
+<p><strong>g hum extend partation k baad 2 oor primary partations bna skty hain.</strong></p>
+<p><code>Q:_ kia extend partation ka driver hota hai? </code></p>
+<p><strong>Nahi, extended partition ka koi driver nahi hota.</strong></p>
+<p><code>Q:_ extend partation kia hai?</code></p>
+<p><strong>Ek hard disk sirf 4 primary partitions bana sakti hai.Lekin agar hume 4 se zyada chahiyein, to hum ek extended partition banate hain yeh khud data store nahi karti, bas container hoti hai.Uske andar hum logical partitions banate hain jahan actual data hota hai.</strong></p>
+<p><code>Q:_Primary partation kai hai?</code></p>
+<p><strong>Pimary partation Real usable partition hoti hai jo data store rk skti hai or bootable bhi bnai ja skti hai.</strong></p>
+<p><em><strong>Zyada se zyada 4 primary partitions ek disk par ho sakti hain.</strong></em></p>
+<p><code>Q:_ logical partation kia hoti hai?</code></p>
+<p><em><strong>Veesy to sb partation logical hi hoti hai lakin yhan logical partation sy muraaad wo partation hai jo extended partation k andar create hoti hai or data srore kr skti hai.</strong></em></p>
+<p><code>Hum 1 extended partation main 63 logical partation create kr skty hain.</code></p>
+<p><img src="image-64.png" alt="alt text"></p>
+<p><code>Q:- Kia har logical partation ka apna driver hota hai?</code></p>
+<p><strong>Har logical partition ka apna driver nahi hota.Sab logical partitions ek hi disk driver share karte hain.</strong></p>
+<p><code>Q:_Kia har primary partation ka pna driver hota hai?</code></p>
+<p><em><strong>har OS ek hard disk k lye single driver assign krt hai . yaani <code>/dev/sda</code>Us disk ke andar jitni bhi primary partitions hain (/dev/sda1, /dev/sda2, /dev/sda3,),sab usi driver ke zariye access hoti hain.</strong></em></p>
+<p><code>Q:_partations ko (/dev/sda1, /dev/sda2, /dev/sda3,) ye is trha name q dye jaaty hain jb k dirver to same hi use krty hain?</code></p>
+<p><strong>driver same hota hai, Lekin OS ko har partition tak access karne ke liye alag path chahiye hota hai.Is liye Linux har partition ko unique name deta hai — /dev/sda1, /dev/sda2, etc.</strong></p>
+<h4 id="ye-mounting-process-k-lye-bhi-zroori-hoa-hai"><code>Ye mounting process k lye bhi zroori hoa hai.</code></h4>
+<p><code>Q:_What is Partation Tbale?</code></p>
+<p>*<strong>Partition Table ek map  hai jo disk ke andar har partition ka location aur size batata hai.</strong></p>
+<h5 id="partation-table-k-kaam"><code>Partation Table k kaam..</code></h5>
+<ol>
+<li>
+<p>Ye harddisk main partations ki iformation store krt hai.</p>
+</li>
+<li>
+<p>Ye jb system boot hota to Operating System ko Guide Karta hai k harddisk main kitni partation hain or khan hain taa k OS in ko access kr skee.</p>
+</li>
+<li>
+<p>ye New Partitions Create/Delete Karne Mein Madad krta hai</p>
+</li>
+</ol>
+<h4 id="types"><code>.Types </code></h4>
+<p>Partatoin table ki 2 types hoti hain:</p>
+<ol>
+<li>
+<p>msdos/MBR (Master Boot Record)</p>
+</li>
+<li>
+<p>GPT (GUID partaion table )</p>
+</li>
+</ol>
+<ul>
+<li>MBR purany OS main hota hai jis k zryee 1 hard disk main sirf 4 primary partation bna skta hai.</li>
+<li><code>GPT </code> Ye table type new OS main aati hai . or is k zryee hum 1 Hardisk main 128 primary partaion bna skty hain lakin harddisk ki storage 2TB se zyada hoo.</li>
+</ul>
+<p>jb partations create ho jaye <code>w</code> run kr k partation table ko update kr dya jata hai.</p>
+<p>is k baad  hum <code>partx </code>command run kr k partation ko kernal k knowledge main laaty hai taa k system boot hony par OS partaion ko access kr skee.</p>
+<p>kernal k saath attach krny k baad partations main <code>mkfs</code> command k zryee filesystem bnaya jata hai.is amal ko formatig kehty hain.</p>
+<p>filesystem jb ban jata hai to file ko kisi directory k saath attach kr dya jata hai taa k partation main mjood data read,write hoo skee is amal ko mounting kehty hain.</p>
+<hr>
+<h2 id="17fsck-repairing-the-hd">17.FSCK-Repairing the HD</h2>
+<p>Jab hum system start krty hain to OS storage yani harddisk sy RAM main load hoo jata hai.</p>
+<p><code>Q:_</code>kia reason hau OS k data RAM main load ho jata hai?</p>
+<p>OS ka data RAM main is liye load hota hai taake system fast chale</p>
+<p><code>DetailS</code></p>
+<p>Speed:</p>
+<p>Hard disk slow storage hoti hai.or RAM  bahut fast hoti hai.Is liye OS apna important data (jaise kernel, drivers, aur frequently used files) RAM main load karta hai taake CPU unhe jaldi access kar sake.</p>
+<p>Execution ke liye zaroori hota Jab koi program ya OS function run hota hai, CPU sirf RAM se data read kar sakta hai — direct HDD se nahi.
+Is liye OS apna data pehle RAM main load karta hai, phir CPU usay execute karta hai.</p>
+<p>RAM main data hone se OS ek saath multiple tasks handle kar sakta hai.</p>
+<p>Harddisk aik mechanical device hai jb k RAM electronic chip hoti hai.</p>
+<p>CPU sirf RAM se direct data read/write kar sakta hai.</p>
+<h5 id="ram-kia-hia"><code>RAM kia hia?</code></h5>
+<p><code>RAM (Random Access Memory) ek temporary memory hoti hai jo computer ke running data aur programs ko fast access ke liye store karti hai.</code></p>
+<p>Lekin kuch tasks or commands esi bhi hoti hain jin ko sirf RAM execute ni kr skti un k lye HDD kaam krti hai.</p>
+<p><code>rm -rf /*</code> command ko HDD hi execute krti hain q k ye pura OS delete krny ki command hai or is main HDD hi amal pera hoti hai q k overall data ro HDD main hi hota hai or aap us ko delet krny ja rhee hain.isy trha koi file or directory bnana bhi is case ko follow kry ga.</p>
+<h5 id="q--ext2ext3ext4xfs-in-sb-main-kia-diference-hai">Q:- <code>.ext2,.ext3.ext4,.xfs in sb main kia diference hai?</code></h5>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>EXT2</th>
+<th>EXT3</th>
+<th>EXT4</th>
+<th>XFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Journaling</strong></td>
+<td>non</td>
+<td>hota hai</td>
+<td>hota hai</td>
+<td>Advanced</td>
+</tr>
+<tr>
+<td><strong>Max File Size</strong></td>
+<td>2 TB</td>
+<td>2 TB</td>
+<td>Up to 16 TB</td>
+<td>Up to 8 Exabytes</td>
+</tr>
+<tr>
+<td><strong>Max Partition Size</strong></td>
+<td>32 TB</td>
+<td>32 TB</td>
+<td>1 Exabyte</td>
+<td>8 EB</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Slow (no journaling)</td>
+<td>Medium</td>
+<td>Fast average</td>
+<td>Very Fast</td>
+</tr>
+<tr>
+<td><strong>Snapshot</strong></td>
+<td>no</td>
+<td>No</td>
+<td>can not take snapshot</td>
+<td>Can take snapshots</td>
+</tr>
+</tbody>
+</table>
+<p>EXT3 ek directory ke andar maximum 32,000 subdirectories (folders) tak handle kar sakta hai.</p>
+<p>EXT4 ek directory ke andar 64,000 subdirectories tak support karta hai — yani double capacity.</p>
+<h4 id="q-journaling-kia-hota-hai">Q:-<code>Journaling kia hota hai?</code></h4>
+<p>Journaling  file system me esa feature haijo system crash ya power failure ke baad data loss se bachati hai.</p>
+<p>` jb hum partation ko kisi directory sy mount krty hain to actually us partation ka file system RAM main load ho jata hai or jb df -f command run krty hain too hum ko output RAM sy hi ata hai or dikh rha hota hai ki partatiom ksi directory k saath mount hoi hai.
+<img src="image-66.png" alt="alt text"></p>
+<p>ye process temporary hai agar is ko persist/permanent krna hai to is ki entry <code>/cte/fstab</code> k andar krni hoo gi.</p>
+<p><code>vi /etc/fstab</code></p>
+<p>jb hum partation ki entry /etc/fatab main kr dety hain to <code>mount -a</code> ki madad sy hum ummount partation ko mount bhi kr skty hain jin ki enrty fstab main hoi hoo.</p>
+<p>ye process lazim hai agar aap ne ko bhi enrty galat ki to machine crash hoo skti hai or reboot ni ho gai is lye har bar <code>mount -a </code> command run krain jb bhi kisi partation ki entry <code>/etc/fstab</code> min krain.</p>
+<h3 id="fsck"><code>FSCK</code></h3>
+<p><code>fsck ek Linux tool hai jo file system errors detect aur repair karta hai,taake data corruption na ho aur system stable rahe.</code></p>
+<p>gar check krna ho k hmari partation main koi badblocks hain yaani (errors, missing inodes, broken links,) hain to <code>badblocks -v /dev/sdd1</code> run krian gee.</p>
+<p>Data main kbhi kisi qisam ka corruption ni hota balky filesystem main errors, missing inodes, aaty hain jis ki wjha sy data access no hoo pata.</p>
+<p><img src="image-67.png" alt="alt text"></p>
+<p>Pehly badblocks check kiyee jaaty hain. Pic main 0 badblocks dikhaa rhaa hai.</p>
+<p>Neechy filesystem repair krny ki command run ki gai hai. ye command <code>fsck</code> ya <code>e2fsck</code> hoti hai. <code>e2fsck </code>updated tool hai.</p>
+<p><code>error</code> a rha hai k partation mounted hai yaani agar mounted partation ko repair kia jaaye to ye error deta hai or precess ni hota.</p>
+<p><img src="image-68.png" alt="alt text"></p>
+<p>pehly partation ko unmount kia jata hai.</p>
+<p>phir <code>fsck </code> tool ko istemal krty hoyee partation ko clean kia jata hai.</p>
+<p>Now pic main deekha ja skta hai k file clean ho gai hai.</p>
+<p>aik or command use hoti hai ji filesystem main mjood errors ko detect krti hai or k ensure karta hai ke har detected problem bina rukhe repair ho jaye.</p>
+<h4 id="command-e2fsck--yc-devsdb1">Command <code>e2fsck -yc /dev/sdb1</code></h4>
+<p>is command do flags use hoty hain.
+<code>-y,-c</code></p>
+<p><code>-c</code> ke through bad sectors detect karta hai.</p>
+<p><code>-y</code> ensure karta hai ke har detected problem bina rukhe repair ho jaye.
+<img src="image-69.png" alt="alt text"></p>
+<hr>
+<h2 id="18file-system-check-repair">18.File system Check Repair</h2>
+<p>Filesystem check and repair krny k lye k lye zrooroi hai k aap ki partation kisi directory sy mount na ho.</p>
+<p>agar mount hai to sb sy pehly unmount krian or phir <code>fsck</code> ya <code>e2fsck</code> sy filesystem repair krain.</p>
+<p>agar yhan par hum ko <code>/</code> ka filesystem repair krna hoo to <code>/ root</code> ko directly unmount nhi krin gy Q k all process running in <code>/root</code>.</p>
+<p><code>/root</code> ko hum rescue mode main jaa kr unmount kr skty hain taa k process na rukny payen.</p>
+<p><code>fsck</code> ya <code>e2fsck</code> k zryee filesystem repair krny k dooran data lose n hota jb k filesystem ki indexing change hoo jaati hai.</p>
+<p><strong>Manual</strong></p>
+<p><code>e2fsck &amp; fsck</code> manual reapiring tools hian. is process k duraan aap ko bohat jagha par confirmation deni hoti jo k <code>yes</code> <code>no</code> ki sorat main aap sy puchta hai.</p>
+<p><strong>Auto Repairing</strong></p>
+<p><code>e2fsck -y &amp; fsck -y</code></p>
+<p>agar dono commands main hum <code>-y</code> ka use krain to aap ki required confirmations auto yaani khud ba khud hi dee ga . aap ko baar baar <code>yes</code> or <code>no</code> krny ki zrorat ni peesh aye gi.</p>
+<p><strong>Auto reparing with report</strong></p>
+<p><code>e2fsck -yc</code></p>
+<p>agar aap <code>-yc</code> dono flags ka use krty hain to ye aap ko filesystem ki saari report bhi fraham krta hai.k kia kia cheez urepair ho chuki hai.</p>
+<h4 id="hum-fsck-q-krty-hain"><code>Hum FSCK Q krty hain?</code></h4>
+<p>Harddisk ki partation main errors,badblocks aany par harddisk proper work ni kti jis wajah sy hum <code>fsck</code> y <code>e2fsck</code> k zryee is ko clean krty hain.</p>
+<h4 id="ye-badblocks-kis-wajah-sy-aty-hain"><code>ye badblocks kis wajah sy aty hain?</code></h4>
+<p>System ko unclean shutdown krny ki wajha sy yaani machine py kam kry proper band kye bgair systemko shutdown kr dene .</p>
+<p>agar aap chahty hain k system boot hony k duran hi aap ki partation ko check kia jaye k clean hai nhi or agar koi error ya badblocks hain un ko remove kr k filesystem repair kr dy too is k aap ko <code>/etc/fstab</code> main entry krni hoti hai.</p>
+<p>ye enrty fstab ki 6th filed py hoti hai agar whan app <code>0</code> likh doo is ka matlab hai k aap nhi chahty k booting k duraan aap ki harddisk ko check and repair kia jaye .</p>
+<p>agar waha aap <code>1</code> likh dain aap ijazat de rhy hain k sirf <code>/ root</code>  partation ka booting k duran filesystems check and repair kye jaye.</p>
+<p>agar waha aap <code>2</code> likh dain aap ijazat de rhy hain  k booting k duran all aprtations ka filesystems check and repair kye jaye.</p>
+<h3 id="ye-entries-fstab-ki-last-wali-yani-6th-field-main-hoti-hain">ye entries fstab ki last wali yani 6th field main hoti hain.</h3>
+<h3 id="fstab-ki-fields"><code>fstab ki fields .</code></h3>
+<p><img src="image-70.png" alt="alt text"></p>
+<h4 id="1-command-ka-output-doosri-command-main-dena">1 command ka output doosri command main dena.</h4>
+<p>yaani hun <code>/etc</code> directory main hai or <code>ls</code> command sy hum ye check krty hain k is mai ktny files &amp; folders hain.</p>
+<p>to agar hmy count krna ho k kitny files and folders hain to ye command use hoti hai.
+<code>wc -l</code></p>
+<p>agar hum is command ko simply run kry gy to koi output ni de gi .</p>
+<p>agar hum <code>ls | wc -l </code> command run krain ge to ye <code>ls </code> k output <code>|</code> k zryee <code>wc -l</code> main bheej dee ga or <code>wc -l</code> is ka out put numbers main de gi k kitny files and folders hain<code>/etc</code> directory main.</p>
+<h4 id="less-command">less command</h4>
+<p>agar hum <code>ls /etc/*</code> run krain gy to is ka ouput kafi long term ho ga agar is ko hum sigle line scroling main hasil krna hai to <code>\</code> k saath <code>less</code> command use kr k single line scroling shape main hasil kr skty hain.</p>
+<p><code>ls /etc/* | less</code></p>
+<h4 id="more-command">more command</h4>
+<p>gar hum <code>ls /home/*</code> run krain gy to is ka ouput kafi long term ho ga agar is ko hum page wise hasil krna hai to <code>\</code> k saath <code>more</code> command use kr k page wise hasil kr skty hain.</p>
+<p><code>ls /home/* | more</code></p>
+<hr>
+<h2 id="19grep-find-locate-fstab-process-daemons">19.Grep find locate fstab process daemons</h2>
+<p>Filesystem ki 4th filed mian 7 kisam sy option hi hain</p>
+<p><code>auto, rw, dev, async, suid, exec, nouser</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Option</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>auto</strong></td>
+<td>Partition automatically boot time par mount hoti hai.</td>
+</tr>
+<tr>
+<td><strong>rw</strong></td>
+<td>Read aur Write dono permission deta hai.</td>
+</tr>
+<tr>
+<td><strong>dev</strong></td>
+<td>Device files ko use karne ki permission rkhta  hai.</td>
+</tr>
+<tr>
+<td><strong>async</strong></td>
+<td>Data asynchronously likha jata hai jis sy performance better hoti hai.</td>
+</tr>
+<tr>
+<td><strong>suid</strong></td>
+<td>SUID/SGID bits enable rehti hain.</td>
+</tr>
+<tr>
+<td><strong>exec</strong></td>
+<td>Executable files run karne ki permission deta hai.</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>| **nouser** | Sirf root user mount/unmount kar sakta hai. |
+
+</div></code></pre>
+<p><img src="image-71.png" alt="alt text"></p>
+<p>Agar 4th filed main nouser ki permission likh di jate to koi bhi user partation mount ni kr skta siway root user k.</p>
+<p>Agar 4th filed main default ilkha rhee to aap us k aagy jo bhi permission add krain gy system default option ko skip kr k ap ki ad ki gai permission ko priority dee ga or use kry ga.</p>
+<h4 id="process--deamons"><code>Process &amp; Deamons</code></h4>
+<p>jab koi program ya command execute .ho rahi hoti hai to wo process ban jaati hai</p>
+<p>Process hamesha RAM  mein run hota hai.</p>
+<h5 id="open-file"><code>open file</code></h5>
+<p>Jab koi program ya process kisi file ko use kar raha hota hai or file RAM mian load hoti hai to wo file <code>open file</code> kehlati hai.</p>
+<p>check krna ho k hmaari konsi file open file hai
+<code>lsof</code> command use hoti ai.</p>
+<p>agar in ko count krna ho to hum ne phli bhi 1 comman ka ouput count kia hai . yaani <code>wc -l</code> command use krain lekin <code>|pipe</code> k zryee if command <code>lsof</code> ka output <code>wc -l </code>main lee gy.</p>
+<ul>
+<li><code>lsof | wc -l</code></li>
+</ul>
+<h3 id="grep-command"><code>grep </code> command</h3>
+<p><code>Full form.</code></p>
+<p><code>grep = Global Regular Expression Print</code></p>
+<p><code>Defination</code></p>
+<p>grep is a Linux command-line tool jo text ya files me search karne ke liye use hoti hai.</p>
+<ul>
+<li>example</li>
+</ul>
+<p><code>grep root /etc/passwd</code></p>
+<p>Ye command <code>/etc/passwd file</code> ke andar <code>root</code> word search karegiaur wo lines show karegi jahan ye word milta hai.</p>
+<h4 id="is-command-main-flags-ka-bohat-eham-kirdar-hota-hai">is command main flags ka bohat eham kirdar hota hai.</h4>
+<p><code>-i</code>agar command k saath ye <code>-i</code> use krain to command ki case senisitivity khatam ho jaye gi yani jo word search kia ho ga wo big or small lettes dono main hi mil jaye ga.</p>
+<p><code>grep -i &quot;host&quot; /etc/passwd</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Option</th>
+<th style="text-align:left">Explanation</th>
+<th style="text-align:left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>-i</code></td>
+<td style="text-align:left">Case-insensitive search</td>
+<td style="text-align:left"><code>grep -i &quot;root&quot; /etc/passwd</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-n</code></td>
+<td style="text-align:left">Line number show kare</td>
+<td style="text-align:left"><code>grep -n &quot;bash&quot; /etc/passwd</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>ls /etc/* | grep -i host | wc -l</code></p>
+<p>Ye command /etc folder ke andar un sab files/folders ko count karegi
+jinke naam me “host” word aata hai (case-insensitive).</p>
+<h4 id="find-command"><code>find</code> command</h4>
+<p>find ek powerful searching command hai jo files aur directories ko specific conditions ke basis par search karta hai (jaise name, size, date, permission, owner, etc).</p>
+<p>is command sy search ki gai files and folders ko delete bhi kr skty hain ,permission bhi change ke skty hainetc.</p>
+<ul>
+<li><code>find /home/ -iname yasir.txt</code></li>
+</ul>
+<p>Ye command /home directory ke andaraisi file ko search karegi jiska naam yasir.txt ho chahe wo uppercase ya lowercase letters me likhi hoi.</p>
+<h2 id="20process-daemons-performacemonitoring-p1">20.Process-daemons-PerformaceMonitoring-P1</h2>
+<p>pehchy hum ne prha hai `losf   command kia krti hai.</p>
+<p>proces kia hota hai.</p>
+<p>open file kia hai .</p>
+<p>ab hum process and daemons k baary main more prhen gy...</p>
+<ul>
+<li>
+<p>Each process have own <code>pid</code> yaani har har process anpi aik `pid (Process id) rkhta hai jis k zryee system process ko pehchcnta hai.</p>
+</li>
+<li>
+<p><code>erendom</code>assin and manage <code>pids</code> or 80% process
+<code>pids</code> change hoty rhty hain agar service ki restar krain ya machine ko restart krain to <code>pid</code> change ho jata hai.</p>
+<p>agar dwkhna ho k kitne process hmari machine pe chal rhe hain to command hai.</p>
+</li>
+<li>
+<p><code>ps -el</code></p>
+</li>
+</ul>
+<p>agar pages ki trha output chahye to.</p>
+<ul>
+<li><code>ps -el |less</code></li>
+<li><code>ps -el  |more</code></li>
+</ul>
+<p>agar count krna ho k kitne proceess chal rhe hain to.</p>
+<ul>
+<li>
+<p><code>ps -l | wc -l</code></p>
+<p>mari machine py os time 207 process chal rhee hthee.</p>
+<p><img src="image-72.png" alt="alt text"></p>
+</li>
+</ul>
+<p>Process ko kill krny yaani stop krny k lye command <code>kill pid</code></p>
+<p>agar pid maloom nhi hai to <code>grep command </code> or process k name sy aap pid maloom kr skyty hain jeesy k neech pic main dekhaya gya hai.</p>
+<p><img src="image-73.png" alt="alt text"></p>
+<p>direct name k saath process kill krny ki command</p>
+<p><code>pkill process name</code></p>
+<p><code>cpu</code> k details check krny ki command</p>
+<ul>
+<li><code>lscpu</code></li>
+</ul>
+<p><code>usb</code> ki details check krny ki command</p>
+<ul>
+<li><code>lsusb</code></li>
+</ul>
+<h4 id="init-rehl6-tk-is-a-father-of-all-processes-or-is-ki-pid-kbhi-change-ni-hoti-hairehl-7-main-system-d-hota-hai"><code>init REHL6 tk is a father of all processes or is ki </code>pid<code> kbhi change ni hoti hai.REHL 7 main system d hota hai</code></h4>
+<ul>
+<li><code>pstree </code> process ka hirarchey hota hai.</li>
+</ul>
+<hr>
+<h2 id="21process-daemons-performacemonitoring-p2">21.Process daemons PerformaceMonitoring-P2</h2>
+<p>How to check load in system?</p>
+<p>Linux Performance Monitoring Commands</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>top</code></td>
+<td>System processes aur CPU usage live show karta hai.</td>
+</tr>
+<tr>
+<td><code>htop</code></td>
+<td><code>top</code> ka advanced version, colorful aur interactive.</td>
+</tr>
+<tr>
+<td><code>sar</code></td>
+<td>System activity report deta hai.</td>
+</tr>
+<tr>
+<td><code>iostat</code></td>
+<td>HDD load aur I/O performance check karta hai.</td>
+</tr>
+<tr>
+<td><code>vmstat</code></td>
+<td>Memory, swap, process aur CPU statistics deta hai.</td>
+</tr>
+<tr>
+<td><code>iperf</code></td>
+<td>Network bandwidth aur speed test karta hai.</td>
+</tr>
+<tr>
+<td><code>tcpdump</code></td>
+<td>Network packets capture aur analyze karne ke liye.</td>
+</tr>
+</tbody>
+</table>
+<p>lakin yhan hum <code>top</code> k baary main hi parheen gy.ye tmaam process jo RAM main load hoty hain un ko dikhata hai with used parts and programes ki performance k.</p>
+<p><strong><img src="image-74.png" alt="alt text"></strong></p>
+<ul>
+<li>
+<p>what is load?</p>
+<ul>
+<li>processes ka row yani queue main wait krna load kehlata hai.
+<img src="image-75.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p>agar RAM k process deekhny hon <code>/proc</code> directory main ja k deekh skty hain.it conatains navigated files that contain from RAM.</p>
+<p>agar <code>top</code> command k alwa kisi or command sy storage yani memory check krni ho to ya command bhi use kr skty hain,</p>
+<p><code>free -m</code></p>
+<p><img src="image-76.png" alt="alt text"></p>
+<hr>
+<h2 id="22process-daemons-performance-monitoring-p3-nw-start">22.Process daemons Performance Monitoring-P3 NW Start</h2>
+<p>Hum ne pely bhi prhaa ha k kisi process ko kesy stop krna hai or khatam krna hai.</p>
+<p>ab yhan pr hum <code>pkill</code> and <code>kill</code> k darmyaan faraq krain gy.</p>
+<ul>
+<li><code>pkill command</code></li>
+</ul>
+<p>agar is command sy kisi process ko khatam krna hai to hmy <code>pkill</code> k saath precess ka name likhna hoa ga .</p>
+<p>command :<code>pkill chrome</code></p>
+<ul>
+<li><code>kill</code>
+kill command main hum process k name ki bjaye us process ki id yani <code>pid</code> deety hain.</li>
+</ul>
+<p>command: <code>kill 224</code></p>
+<p>kill command agar kam ni rkti to hum is ko firce fully kill krty hai yani flags use krty hain.</p>
+<p><code>kill -9 224</code></p>
+<ul>
+<li>
+<p>forcefully kill krny k lye hum <code>kill</code> k saath <code>-9</code> use kry hain.</p>
+</li>
+<li>
+<p>by default kill <code>-15</code> ko use krta hai lekin <code>-9</code> focefully kill krt hai.</p>
+</li>
+</ul>
+<p><img src="image-78.png" alt="alt text"></p>
+<ul>
+<li><code>Kill -l</code> sy hum kill command k signal maloom kr skty hain.</li>
+</ul>
+<p><img src="image-79.png" alt="alt text"></p>
+<p>highlighted 3 signal hum aam taor par use krty hain.</p>
+<h4 id="what-is-ampersand">what is <code>Ampersand (&amp;)</code> ?</h4>
+<p>Ye kisi Command ko background mein run karne ke liye istemal hota hai.</p>
+<p>Jab aap kisi command ke end mein <code>&amp;</code> lagate ho, to wo process background job ban jata hai.</p>
+<p>System usko ek job ID aur process ID (PID) deta hai.</p>
+<ul>
+<li><code>  lekin system band hony kis surat main process bhi band ho jaye ga</code></li>
+</ul>
+<p><img src="image-77.png" alt="alt text"></p>
+<ul>
+<li>
+<p>gnome terminal ny process ko bsah shell main load kia</p>
+</li>
+<li>
+<p>shell yani bash ny process ko chlaya.</p>
+<ul>
+<li>agar gnome terminal ko band kr dain gy to process band ho jaye ga.</li>
+</ul>
+</li>
+</ul>
+<p><code>jobs</code> and <code>fg</code> ye commands background process ko dekhny k lye hoti hai.</p>
+<p>Aur agar chaho to is command k zryee usko foreground mein wapas la skty hain .</p>
+<p><code>fg %1</code>yahan %1 job number hai</p>
+<h4 id="what-is-nohup-command">what is <code>nohup</code> command?</h4>
+<p>Full form <code>No Hang Up</code></p>
+<p>ye command process ko out of shell chlany k lye use hoti hai.</p>
+<p>yani agar aap terminal band kar do
+ya logout bhi kar do to bhi wo command ya process band ni hota or background mein chltaa rehta hai.</p>
+<p><code>nohup &quot;command&quot; &amp;</code></p>
+<h4 id="kia-nohup-k-saath--lgana-zaroori-hota-hai">Kia <code>nohup</code> k saath <code>&amp;</code> lgana zaroori hota hai?</h4>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Command</th>
+<th>Kya Hota Hai</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>With <code>&amp;</code></strong></td>
+<td><code>nohup command &amp;</code></td>
+<td>Command <strong>background</strong> mein chali jaati hai aur <strong>logout ke baad bhi</strong> chalti rehti hai.</td>
+</tr>
+<tr>
+<td><strong>Without <code>&amp;</code></strong></td>
+<td><code>nohup command</code></td>
+<td>Command <strong>foreground</strong> mein chalegi (terminal busy rahega), lekin <strong>logout ya terminal close hone ke baad bhi</strong> band nahi hogi.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="what-is-fork-bombing">What is fork bombing?</h4>
+<p>Is main 1 program  apne aap ko baar-baar copy krta hai isliye bahut jaldi bahut saare processes ban jaate hain or System ki memory khatam ho jaati hai aur computer hang ho jaata hai.</p>
+<p>Command</p>
+<p><code>:(){ :|:&amp; };:</code></p>
+<p>Ye command ek fork bomb banata hai matlab ye system main infinite processes bana deta hai CPU aur memory dono full ho jate hain system hang / crash ho jata hai.</p>
+<h3 id="what-is-daemon">what is daemon?</h3>
+<p><code>Daemon ek aisa background process hota hai jo system boot hone ke baad automatically start hota hai aur continuously specific task perform karta rehta hai.</code></p>
+<h4 id="differnce-between-process-an-daemons">Differnce Between Process an Daemons</h4>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Process</th>
+<th>Daemon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>Program jo run ho raha hai (foreground ya background dono ho sakta hai)</td>
+<td>Special process jo background mein continuously chal kar service provide karta hai</td>
+</tr>
+<tr>
+<td><strong>Start Hone ka Time</strong></td>
+<td>User ke command dene par (manual)</td>
+<td>System boot hone par (automatically)</td>
+</tr>
+<tr>
+<td><strong>User Interaction</strong></td>
+<td>User directly control karta hai</td>
+<td>User se directly interact nahi karta</td>
+</tr>
+<tr>
+<td><strong>Terminal Control</strong></td>
+<td>Usually terminal se linked hota hai</td>
+<td>Terminal se unlink hota hai (no controlling terminal)</td>
+</tr>
+<tr>
+<td><strong>Lifetime</strong></td>
+<td>Jab tak user program run kare</td>
+<td>System shutdown tak active rehta hai</td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Temporary kaam karna (e.g. file edit, copy)</td>
+<td>Continuous service dena (e.g. SSH, web, logs)</td>
+</tr>
+</tbody>
+</table>
+<p><img src="image-80.png" alt="alt text"></p>
+<p><img src="image-81.png" alt="alt text"></p>
+<p>1: System ko static IP address do.
+Ya phir
+2: System ko DHCP ke zariye automatic IP lainay do.</p>
+<p>--- Agar phir bhi kaam na karay to ---</p>
+<p>3: vi ya koi aur text editor use karke yeh file open karo:
+/etc/sysconfig/network-scripts/ifcfg-eth0
+Us file mein yeh line check karo ke ONBOOT=yes hai ya nahi. Agar no hai to use yes kar do. Iska matlab hai system start hotay he network interface on ho jaye ga.</p>
+<p>4: Network service ko restart karo yeh command de kar:
+service network restart</p>
+<p>5: Test karo ke ab routing theek hai ya nahi. Yeh command <code>ip r l</code></p>
+<p>6: Agar upar walay sab steps karne ke baad bhi masla hal na ho, to apni Virtual Machine (VM) ke settings mein ja kar &quot;Network&quot; section check karo. Wahan par &quot;NAT&quot; setting ko change kar ke &quot;Bridge&quot; kar do. Yeh VM ko apne host computer ke network directly attach kar day ga.</p>
+
+</body>
+</html>
